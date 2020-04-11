@@ -9,15 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringBootAzureApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBootAzureApplication.class, args);
 
-
-
-
-
-
-
+    public static void main(String[] args)throws Exception {
+       SpringApplication.run(SpringBootAzureApplication.class, args);
  }
 
 }

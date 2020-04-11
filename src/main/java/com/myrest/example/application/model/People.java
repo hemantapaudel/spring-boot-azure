@@ -1,0 +1,34 @@
+package com.myrest.example.application.model;
+
+import com.microsoft.azure.storage.table.TableServiceEntity;
+
+public class People extends TableServiceEntity {
+
+    public People(String lastName, String firstName) {
+        this.partitionKey = lastName;
+        this.rowKey = firstName;
+    }
+
+    public People() {
+
+    }
+
+    String email;
+    String phoneNumber;
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+}

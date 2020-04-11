@@ -1,4 +1,4 @@
 FROM openjdk:8
-ADD target/spring-boot-jpa-docker.jar spring-boot-jpa-docker.jar
-EXPOSE 8082
-ENTRYPOINT ["java" ,"-jar", "spring-boot-jpa-docker.jar"]
+ADD target/spring-boot-azure.jar spring-boot-azure.jar
+EXPOSE 80
+ENTRYPOINT ["java" ,"-jar", "spring-boot-azure.jar"]
