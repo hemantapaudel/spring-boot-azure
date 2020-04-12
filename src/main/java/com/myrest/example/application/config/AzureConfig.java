@@ -83,6 +83,8 @@ public class AzureConfig {
         customer3.setEmail("Denise@contoso.com");
         batchOperation.insertOrReplace(customer3);
 
+
+
         // Execute the batch of operations on the "people" table.
         cloudTable.execute(batchOperation);
 
