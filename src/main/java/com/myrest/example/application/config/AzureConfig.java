@@ -9,6 +9,8 @@ import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.table.CloudTable;
 import com.microsoft.azure.storage.table.CloudTableClient;
+import com.microsoft.azure.storage.table.TableBatchOperation;
+import com.myrest.example.application.model.People;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,8 +55,40 @@ public class AzureConfig {
         String tableName = "people";
         CloudTable cloudTable = tableClient.getTableReference(tableName);
         boolean iscreated = cloudTable.createIfNotExists();
+        createDummyData( tableClient);
         return  tableClient;
     }
+
+    private void createDummyData(CloudTableClient tableClient) throws URISyntaxException, StorageException {
+        String tableName = "people";
+        CloudTable cloudTable = tableClient.getTableReference(tableName);
+        // Define a batch operation.
+        TableBatchOperation batchOperation = new TableBatchOperation();
+
+
+        // Create a customer entity to add to the table.
+        People customer = new People("Smith", "Jeff");
+        customer.setEmail("Jeff@contoso.com");
+        customer.setPhoneNumber("425-555-0104");
+        batchOperation.insertOrReplace(customer);
+
+        // Create another customer entity to add to the table.
+        People customer2 = new People("Smith", "Ben");
+        customer2.setEmail("Ben@contoso.com");
+        customer2.setPhoneNumber("425-555-0102");
+        batchOperation.insertOrReplace(customer2);
+
+        // Create a third customer entity to add to the table.
+        People customer3 = new People("Smith", "Denise");
+        customer3.setEmail("Denise@contoso.com");
+        batchOperation.insertOrReplace(customer3);
+
+        // Execute the batch of operations on the "people" table.
+        cloudTable.execute(batchOperation);
+
+
+    }
+
 
 }
 
